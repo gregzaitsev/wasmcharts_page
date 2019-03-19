@@ -873,8 +873,12 @@ async function main() {
   renderPrev();
 }
 
-window.onload = () => {
+function selectDataset() {
+  var selected = document.getElementById('setselect').value;
+  dataSet = selected;
   main();
+  document.getElementById('step0').style.opacity = 0;
+  setTimeout(() => { document.getElementById('step0').style.display = 'none'}, 1000);
 }
 
 window.onresize = async function(event) {
