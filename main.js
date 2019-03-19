@@ -185,7 +185,7 @@ function hoverLookup(e) {
     info.id = `info`;
     info.classList.add('info');
     info.style.left = `${getCanvasXFunc(hoverLineX)/dpi-20}px`;
-    info.style.top = `${20}px`;
+    info.style.top = `${-10}px`;
     info.style.backgroundColor = themes[mode].back;
     info.style.color = themes[mode].text;
 
