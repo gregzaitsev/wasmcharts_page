@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <script src="chart_data.json"></script>
+  <script src="main.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .nightBack {
+      background-color:#000033;
+    }
+
+    .dayBack {
+      background-color:#FFFFFF;
+    }
+
+    .circle {
+      position:absolute;
+      width: 6px;
+      height: 6px;
+      padding: 0px;
+      background-color: #fff;
+      border-width: 1.5px;
+      border-style: solid;
+      border-color: #f00;
+      border-radius: 50%;
+    }
+
+    .info {
+      -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+      position:absolute;
+      padding: 10px;
+      background-color: #fff;
+      border-width: 1px;
+      border-style: solid;
+      border-color: #ccc;
+      border-radius: 10px;
+    }
+
+    .infodata {
+      float: left;
+      padding: 5px;
+    }
+
+    .infodatanum {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 18px;
+      text-align: left;
+    }
+
+    .infodatatxt {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    h1 {
+      color: #000000;
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 25px;
+      padding-left: 20px;
+      position:absolute;
+      text-align: left;
+    }
+
+    h2 {
+      bottom: 0;
+      color: #5555EE;
+      cursor: pointer;
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 25px;
+      position:absolute;
+      text-align: center;
+      width: 100%;
+    }
+
+    h3 {
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    span {
+        position:absolute;
+        color: #777;
+        display: block;
+        font-family: Verdana, Geneva, sans-serif;
+        font-size: 12px;
+        opacity: 0.0;
+        transition: opacity 0.3s ease;
+        z-index:100;
+    }
+
+    .rangeselector {
+        position:absolute;
+        opacity:0.7;
+        background-color:#eeeef5;
+        z-index:3;
+    }
+
+    [type="checkbox"]:not(:checked),
+    [type="checkbox"]:checked {
+      display: none;
+    }
+
+    label {
+      padding: 30px;
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 20px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      padding: 10px 10px 10px 40px;
+      margin: 5px;
+      width: 24%;
+      float: left;
+    }
+
+    .checkmark {
+      position: absolute;
+      top: 0px;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background: #e6e6e6;
+      border-radius: 10px;
+      margin: 10px 10px 10px 10px;
+    }
+
+    .checkbox {
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+
+    /* Checked state */
+    .checkbox input:checked ~ .checkmark {
+      background: #2aa1c0;
+    }
+
+    /* Check mark */
+    .checkmark:after {
+      position: absolute;
+      display: none;
+      content: '';
+    }
+
+    /* Show check mark */
+    .checkbox input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Checkbox tick */
+    .tick .checkmark:after {
+      top: 4px;
+      left: 8px;
+      width: 3px;
+      height: 8px;
+      transform: rotate(45deg);
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+    }
+
+  </style>
+</head>
+<body>
+  <h1 id="titleLabel">Followers</h1>
+  <canvas id="c" style="position:absolute;z-index:2;"></canvas>
+  <canvas id="cp" style="position:absolute;z-index:2;"></canvas>
+  <div id="mo" style="position:absolute;z-index:3;" onmousemove="hoverLookup(event);" onmouseout="lookupMouseout(event);"></div>
+
+  <!-- Range selector -->
+  <div id="rsleft"      class="rangeselector" onmouseover="resetLookup()"></div>
+  <div id="rsright"     class="rangeselector" onmouseover="resetLookup()"></div>
+  <div id="rstop"       class="rangeselector" style="background-color:#ccc"></div>
+  <div id="rsbottom"    class="rangeselector" style="background-color:#ccc"></div>
+  <div id="rsleftdrag"  class="rangeselector" style="background-color:#ccc; cursor:col-resize;" onmousedown="dragleftStart(event)"></div>
+  <div id="rsrightdrag" class="rangeselector" style="background-color:#ccc; cursor:col-resize;" onmousedown="dragrightStart(event)"></div>
+  <div id="rsmiddle"    class="rangeselector" style="opacity:0;cursor:grab;" onmousedown="dragrangeStart(event)" onmousedown="dragleftStart(event)"></div>
+
+  <div id="buttons" style="position:absolute;" onmouseover="resetLookup()">
+    <div id="theme" style="position:relative; float:left; width:100%;">
+      <h2 onclick="switchMode();" id="themeLabel">Switch to Night Mode</h2>
+    </div>
+  </div>
+
+</body>
+</html>
