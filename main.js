@@ -356,13 +356,13 @@ function dragrangeStart(e) {
 function animateVisibleRange() {
   calculateVisibleRanges();
   var update = false;
-  var delta = Math.abs(currentMaxY - (globalMaxY - globalMinY)*1.05) / 10;
+  var delta = Math.abs(currentMaxY - (globalMaxY - globalMinY)*1.1) / 10;
   if (delta < 10) delta = 10;
-  if (currentMaxY < (globalMaxY - globalMinY)*1.05 - delta) {
+  if (currentMaxY < (globalMaxY - globalMinY)*1.1 - delta) {
     currentMaxY += delta;
     update = true;
   }
-  if (currentMaxY > (globalMaxY - globalMinY)*1.05 + delta) {
+  if (currentMaxY > (globalMaxY - globalMinY)*1.1 + delta) {
     currentMaxY -= delta;
     update = true;
   }
@@ -585,8 +585,8 @@ function updateVisibleRange() {
 function setVisibleRanges() {
   const r = calculateVisibleRanges();
 
-  currentMinY = globalMinY*0.95;
-  currentMaxY = globalMaxY*1.05;
+  currentMinY = globalMinY*0.9;
+  currentMaxY = globalMaxY*1.1;
   setVisibleRectFunc(r.x1, currentMinY, r.x2, currentMaxY);
   setVisibleRectPrevFunc(minX, currentMinY, maxX, currentMaxY);
 }
