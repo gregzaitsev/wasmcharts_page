@@ -565,7 +565,7 @@ function calculateVisibleRanges() {
   dataColNames.forEach((colName) => {
     if (seriesEnabledByName[colName]) {
       if (globalMaxY < maxY[colName]) globalMaxY = maxY[colName];
-      if (globalMinY > minY[colName]) globalMinY = minY[colName];
+      //if (globalMinY > minY[colName]) globalMinY = minY[colName];
     }
   });
 
@@ -671,7 +671,7 @@ function updateYMarks() {
     for (var j=0; j<yLabels.length; j++) {
       if (Math.abs(markY - yLabels[j].coord) < 10.0) {
         var label = document.getElementById(yLabels[j].id);
-        label.style.top = `${getCanvasYFunc(markY)/dpi-20}px`;
+        label.style.top = `${getCanvasYFunc(yLabels[j].coord)/dpi-20}px`;
         exists = true;
         yLabels[j].used = true;
       }
