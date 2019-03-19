@@ -73,14 +73,16 @@ const themes = {
     text: '#000000',
     backClass: 'dayBack',
     nextMode: 'Night',
-    rangeSelector: '#eeeef5'
+    rangeSelector: '#eeeef5',
+    checkborder: '#eee'
   },
   'Night': {
     back: '#000033',
     text: '#FFFFFF',
     backClass: 'nightBack',
     nextMode: 'Day',
-    rangeSelector: '#333333'
+    rangeSelector: '#333333',
+    checkborder: '#444'
   }
 };
 const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -477,7 +479,7 @@ function setupSwitches() {
     var id = `series${dataCol}`;
     var onCheckJS = `seriesCheck("${id}", "${dataCol}");`;
     html +=
-      `<label class="checkbox tick" id='l${dataCol}' for='series${dataCol}'>${colLabel}<input type="checkbox" id='${id}' onchange='${onCheckJS}' checked="checked"/><div class="checkmark" style="background:${seriesColorByName[dataCol]}"></div></label>`;
+      `<label class="checkbox tick" style='border:1.2px solid ${themes[mode].checkborder};' id='l${dataCol}' for='series${dataCol}'>${colLabel}<input type="checkbox" id='${id}' onchange='${onCheckJS}' checked="checked"/><div class="checkmark" style="background:${seriesColorByName[dataCol]}"></div></label>`;
   });
   bdiv.innerHTML = html + prevhtml;
 }
@@ -854,7 +856,9 @@ async function switchMode() {
   labelTextColor = themes[mode].text;
 
   dataColNames.forEach((dataCol) => {
-    document.getElementById(`l${dataCol}`).style.color = themes[mode].text;
+    var lbl = document.getElementById(`l${dataCol}`);
+    lbl.style.color = themes[mode].text;
+    lbl.style.borderColor = `${themes[mode].checkborder}`;
   });
   document.getElementById('titleLabel').style.color = themes[mode].text;
   setRangeSelectorBackground();
