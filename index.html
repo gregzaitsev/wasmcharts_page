@@ -186,9 +186,9 @@
   <div id="rsright"     class="rangeselector" onmouseover="resetLookup()"></div>
   <div id="rstop"       class="rangeselector" style="background-color:#ccc"></div>
   <div id="rsbottom"    class="rangeselector" style="background-color:#ccc"></div>
-  <div id="rsleftdrag"  class="rangeselector" style="background-color:#ccc; cursor:col-resize;" onmousedown="dragleftStart(event)"></div>
-  <div id="rsrightdrag" class="rangeselector" style="background-color:#ccc; cursor:col-resize;" onmousedown="dragrightStart(event)"></div>
-  <div id="rsmiddle"    class="rangeselector" style="opacity:0;cursor:grab;" onmousedown="dragrangeStart(event)" onmousedown="dragleftStart(event)"></div>
+  <div id="rsleftdrag"  class="rangeselector" style="background-color:#ccc; cursor:col-resize;" ontouchstart="dragleftStart(event)" onmousedown="dragleftStart(event)"></div>
+  <div id="rsrightdrag" class="rangeselector" style="background-color:#ccc; cursor:col-resize;" ontouchstart="dragrightStart(event)" onmousedown="dragrightStart(event)"></div>
+  <div id="rsmiddle"    class="rangeselector" style="opacity:0;cursor:grab;" ontouchstart="dragrangeStart(event)" onmousedown="dragrangeStart(event)" ></div>
 
   <div id="buttons" style="position:absolute;" onmouseover="resetLookup()">
     <div id="theme" style="position:relative; float:left; width:100%;">
