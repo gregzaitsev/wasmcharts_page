@@ -408,6 +408,14 @@ function setRangeSelector() {
 function setupCanvas() {
   viewPortWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
   viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+  // Limit how wide the canvases can be because size in our wasm module is limited to
+  // 2048x800
+  if (parseInt((viewPortWidth - 2*hpad) * dpi) > 2048)
+    viewPortWidth = parseInt(2048/dpi + 2*hpad)-1;
+  if (viewPortHeight * canvasRelHeight * dpi > 800)
+    viewPortHeight = parseInt(800/(dpi*canvasRelHeight)) - 1;
+
   allwidth = viewPortWidth - 2*hpad;
   pwidth = width = parseInt(allwidth * dpi);
   height = parseInt(viewPortHeight * canvasRelHeight * dpi);
