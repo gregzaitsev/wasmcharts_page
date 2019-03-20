@@ -484,6 +484,18 @@ function setupSwitches() {
   bdiv.innerHTML = html + prevhtml;
 }
 
+function isWebAssemblySupported() {
+  try {
+    if (typeof WebAssembly === "object"
+      && typeof WebAssembly.instantiate === "function") {
+      const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
+      if (module instanceof WebAssembly.Module)
+        return new WebAssembly.Instance(module) instanceof WebAssembly.Instance;
+    }
+  } catch (e) {}
+  return false;
+}
+
 async function initWebAsm() {
   const memSize = 256;
   memory = new WebAssembly.Memory({ initial: memSize, maximum: memSize });
@@ -883,6 +895,12 @@ function selectDataset() {
   main();
   document.getElementById('step0').style.opacity = 0;
   setTimeout(() => { document.getElementById('step0').style.display = 'none'}, 1000);
+}
+
+window.onload = function() {
+  if (!isWebAssemblySupported()) {
+    document.getElementById('wasmsupport').style.display = 'block';
+  }
 }
 
 window.onresize = async function(event) {
