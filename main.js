@@ -138,7 +138,7 @@ function hoverLookup(e) {
     for (var j=0; j<data[dataSet].columns.length; j++) {
       if (j != xIndex) {
         var datax = data[dataSet].columns[xIndex][i+1];
-        if (Math.abs(datax - x) < minDist) {
+        if ((datax >= xleft) && (datax <= xright) && (Math.abs(datax - x) < minDist)) {
           minDist = Math.abs(datax - x);
           indMin = i+1;
         }
